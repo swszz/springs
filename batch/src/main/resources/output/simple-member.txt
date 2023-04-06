@@ -1,0 +1,4 @@
+Member(name=SUNGWON, age=19)
+Member(name=BURGERKING, age=99)
+Member(name=RAINBOW, age=55)
+Member(name=HEAVEN, age=13)

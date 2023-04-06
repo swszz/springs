@@ -1,0 +1,4 @@
+sungwon,19
+burgerking,99
+rainbow,55
+heaven,13
