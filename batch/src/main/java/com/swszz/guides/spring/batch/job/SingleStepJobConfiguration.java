@@ -3,12 +3,14 @@ package com.swszz.guides.spring.batch.job;
 import com.swszz.guides.spring.batch.job.lisenter.JobCompletionNotificationListener;
 import com.swszz.guides.spring.batch.job.processor.UppercaseMemberNameProcessor;
 import com.swszz.guides.spring.batch.model.Member;
+import com.swszz.guides.spring.batch.scheduler.Scheduler;
+import com.swszz.guides.spring.batch.scheduler.SingleStepJobScheduler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -32,30 +34,30 @@ import org.springframework.transaction.PlatformTransactionManager;
  */
 @Slf4j
 @Configuration
-public class SimpleJobConfiguration {
+public class SingleStepJobConfiguration {
 
     @Bean
-    public Job simpleJob(JobRepository jobRepository, Step simpleStep) {
-        return new JobBuilder("simpleJob", jobRepository)
-                .listener(jobCompletionNotificationListener())
-                .flow(simpleStep)
+    public Scheduler singleStepJobScheduler(Job singleStepJob, JobLauncher jobLauncher) {
+        return new SingleStepJobScheduler(singleStepJob, jobLauncher);
+    }
+
+    @Bean
+    public Job singleStepJob(JobRepository jobRepository, Step singleStep) {
+        return new JobBuilder("singleStepJob", jobRepository)
+                .listener(new JobCompletionNotificationListener())
+                .flow(singleStep)
                 .end()
                 .build();
     }
 
     @Bean
-    public Step simpleStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-        return new StepBuilder("simpleStep", jobRepository)
+    public Step singleStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+        return new StepBuilder("singleStep", jobRepository)
                 .<Member, Member>chunk(1, transactionManager)
-                .reader(reader())
-                .processor(uppercaseMemberNameProcessor())
-                .writer(writer())
+                .reader(singleStepReader())
+                .processor(new UppercaseMemberNameProcessor())
+                .writer(singleStepWriter())
                 .build();
-    }
-
-    @Bean
-    public JobExecutionListener jobCompletionNotificationListener() {
-        return new JobCompletionNotificationListener();
     }
 
     /*
@@ -66,13 +68,7 @@ public class SimpleJobConfiguration {
      */
     @Bean
     @StepScope
-    public UppercaseMemberNameProcessor uppercaseMemberNameProcessor() {
-        return new UppercaseMemberNameProcessor();
-    }
-
-    @Bean
-    @StepScope
-    public FlatFileItemReader<Member> reader() {
+    public FlatFileItemReader<Member> singleStepReader() {
         return new FlatFileItemReaderBuilder<Member>().name("reader")
                 .resource(new ClassPathResource("input/simple-member.txt"))
                 .delimited()
@@ -85,7 +81,7 @@ public class SimpleJobConfiguration {
 
     @Bean
     @StepScope
-    public FlatFileItemWriter<Member> writer() {
+    public FlatFileItemWriter<Member> singleStepWriter() {
         return new FlatFileItemWriterBuilder<Member>().name("writer")
                 .resource(new FileSystemResource("src/main/resources/output/simple-member.txt"))
                 .lineAggregator(new PassThroughLineAggregator<>())

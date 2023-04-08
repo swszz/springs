@@ -1,6 +1,5 @@
 package com.swszz.guides.spring.batch.scheduler;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -9,34 +8,30 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 /**
  * packageName    : com.swszz.guides.spring.batch.scheduler
- * fileName       : SimpleJobScheduler
+ * fileName       : SingleStepJobScheduler
  * author         : 김성원
  * date           : 2023-04-06
  * description    :
  */
-@Component
-@RequiredArgsConstructor
-public class SimpleJobScheduler {
+public class SingleStepJobScheduler extends AbstractScheduler {
 
-    private final Job simpleJob;
-    private final JobLauncher jobLauncher;
+    public SingleStepJobScheduler(@Qualifier("singleStepJob") Job job, JobLauncher jobLauncher) {
+        super(job, jobLauncher);
+    }
 
+    @Override
     @Scheduled(cron = "0/5 * * * * ?")
-    public void run() {
+    public void run() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException {
         final JobParameters jobParameters = new JobParametersBuilder()
                 .addLocalDateTime("startedAt", LocalDateTime.now())
                 .toJobParameters();
-        try {
-            jobLauncher.run(simpleJob, jobParameters);
-        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
-            e.printStackTrace();
-        }
+        jobLauncher.run(job, jobParameters);
     }
 }
