@@ -1,8 +1,8 @@
 package com.swszz.guides.spring.batch.job;
 
 import com.swszz.guides.spring.batch.job.tasklet.SimpleTasklet;
+import com.swszz.guides.spring.batch.scheduler.DefaultJobScheduler;
 import com.swszz.guides.spring.batch.scheduler.Scheduler;
-import com.swszz.guides.spring.batch.scheduler.SingleTaskletJobScheduler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -25,10 +25,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class SingleTaskletJobConfiguration {
 
-    @Bean
-    public Scheduler singleTaskletJobScheduler(Job singleTaskletJob, JobLauncher jobLauncher) {
-        return new SingleTaskletJobScheduler(singleTaskletJob, jobLauncher);
-    }
+//    @Bean
+//    public Scheduler singleTaskletJobScheduler(Job singleTaskletJob, JobLauncher jobLauncher) {
+//        return new DefaultJobScheduler(singleTaskletJob, jobLauncher);
+//    }
 
     @Bean
     public Job singleTaskletJob(JobRepository jobRepository, Step singleTaskletStep) {

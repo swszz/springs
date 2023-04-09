@@ -8,21 +8,20 @@ import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalDateTime;
 
 /**
  * packageName    : com.swszz.guides.spring.batch.scheduler
- * fileName       : SingleStepJobScheduler
+ * fileName       : DefaultJobScheduler
  * author         : 김성원
- * date           : 2023-04-06
+ * date           : 2023-04-09
  * description    :
  */
-public class SingleStepJobScheduler extends AbstractScheduler {
+public class DefaultJobScheduler extends AbstractScheduler {
 
-    public SingleStepJobScheduler(@Qualifier("singleStepJob") Job job, JobLauncher jobLauncher) {
+    public DefaultJobScheduler(Job job, JobLauncher jobLauncher) {
         super(job, jobLauncher);
     }
 

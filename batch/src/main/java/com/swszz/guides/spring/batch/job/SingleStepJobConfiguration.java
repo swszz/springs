@@ -3,8 +3,8 @@ package com.swszz.guides.spring.batch.job;
 import com.swszz.guides.spring.batch.job.lisenter.JobCompletionNotificationListener;
 import com.swszz.guides.spring.batch.job.processor.UppercaseMemberNameProcessor;
 import com.swszz.guides.spring.batch.model.Member;
+import com.swszz.guides.spring.batch.scheduler.DefaultJobScheduler;
 import com.swszz.guides.spring.batch.scheduler.Scheduler;
-import com.swszz.guides.spring.batch.scheduler.SingleStepJobScheduler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -13,6 +13,7 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.builder.TaskletStepBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
@@ -38,7 +39,7 @@ public class SingleStepJobConfiguration {
 
     @Bean
     public Scheduler singleStepJobScheduler(Job singleStepJob, JobLauncher jobLauncher) {
-        return new SingleStepJobScheduler(singleStepJob, jobLauncher);
+        return new DefaultJobScheduler(singleStepJob, jobLauncher);
     }
 
     @Bean
