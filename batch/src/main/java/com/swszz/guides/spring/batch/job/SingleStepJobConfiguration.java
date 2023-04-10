@@ -3,23 +3,20 @@ package com.swszz.guides.spring.batch.job;
 import com.swszz.guides.spring.batch.job.lisenter.JobCompletionNotificationListener;
 import com.swszz.guides.spring.batch.job.processor.UppercaseMemberNameProcessor;
 import com.swszz.guides.spring.batch.model.Member;
-import com.swszz.guides.spring.batch.scheduler.DefaultJobScheduler;
-import com.swszz.guides.spring.batch.scheduler.Scheduler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.core.step.builder.TaskletStepBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
-import org.springframework.batch.item.file.transform.PassThroughLineAggregator;
+import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
+import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -37,10 +34,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class SingleStepJobConfiguration {
 
-    @Bean
-    public Scheduler singleStepJobScheduler(Job singleStepJob, JobLauncher jobLauncher) {
-        return new DefaultJobScheduler(singleStepJob, jobLauncher);
-    }
+//    @Bean
+//    public Scheduler singleStepJobScheduler(Job singleStepJob, JobLauncher jobLauncher) {
+//        return new DefaultJobScheduler(singleStepJob, jobLauncher);
+//    }
 
     @Bean
     public Job singleStepJob(JobRepository jobRepository, Step singleStep) {
@@ -70,7 +67,7 @@ public class SingleStepJobConfiguration {
     @Bean
     @StepScope
     public FlatFileItemReader<Member> singleStepReader() {
-        return new FlatFileItemReaderBuilder<Member>().name("reader")
+        return new FlatFileItemReaderBuilder<Member>().name("singleStepReader")
                 .resource(new ClassPathResource("input/simple-member.txt"))
                 .delimited()
                 .names(new String[]{"name", "age"})
@@ -83,12 +80,17 @@ public class SingleStepJobConfiguration {
     @Bean
     @StepScope
     public FlatFileItemWriter<Member> singleStepWriter() {
-        return new FlatFileItemWriterBuilder<Member>().name("writer")
-                .resource(new FileSystemResource("src/main/resources/output/simple-member.txt"))
-                .lineAggregator(new PassThroughLineAggregator<>())
+        return new FlatFileItemWriterBuilder<Member>().name("singleStepWriter")
+                .resource(new FileSystemResource("src/main/resources/output/simple-member.csv"))
+                .lineAggregator(new DelimitedLineAggregator<>() {{
+                    setDelimiter(",");
+                    setFieldExtractor(new BeanWrapperFieldExtractor<Member>() {{
+                        setNames(new String[]{"name", "age"});
+                    }});
+                }})
                 .encoding("UTF-8")
                 .append(true)
-                .lineSeparator("\n")
+                .lineSeparator("\r\n")
                 .build();
     }
 }
