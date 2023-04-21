@@ -1,13 +1,13 @@
-package com.swszz.guides.spring.hexagonalarchitecture;
+package com.swszz.guides.spring.cinema;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HexagonalArchitectureApplication {
+public class CinemaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HexagonalArchitectureApplication.class, args);
+        SpringApplication.run(CinemaApplication.class, args);
     }
 
 }

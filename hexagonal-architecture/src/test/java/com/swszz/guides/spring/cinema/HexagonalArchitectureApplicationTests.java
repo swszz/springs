@@ -1,4 +1,4 @@
-package com.swszz.guides.spring.hexagonalarchitecture;
+package com.swszz.guides.spring.cinema;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
