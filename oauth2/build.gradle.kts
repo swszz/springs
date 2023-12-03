@@ -50,6 +50,14 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+allOpen {
+    annotations(
+        "jakarta.persistence.Entity",
+        "jakarta.persistence.MappedSuperclass",
+        "jakarta.persistence.Embeddable"
+    )
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }

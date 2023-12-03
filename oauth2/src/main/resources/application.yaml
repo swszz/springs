@@ -3,3 +3,4 @@ spring:
     import:
       - classpath:oauth2-google.yaml
       - classpath:oauth2-kakao.yaml
+      - classpath:jpa.yaml
