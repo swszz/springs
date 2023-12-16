@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/openfga
+    driverClassName: com.mysql.cj.jdbc.Driver
+    hikari:
+      password: password
+      username: root

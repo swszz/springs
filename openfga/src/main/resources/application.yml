@@ -1,0 +1,9 @@
+spring:
+  config:
+    import:
+      - classpath:mysql-connect.yml
+      - classpath:jpa.yml
+      - classpath:jpa-logging.yml
+
+server:
+  port: 8082

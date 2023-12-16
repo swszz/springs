@@ -6,6 +6,7 @@
     <file type="web" url="file://$PROJECT_DIR$/hexagonal-architecture" />
     <file type="web" url="file://$PROJECT_DIR$/oath2" />
     <file type="web" url="file://$PROJECT_DIR$/oauth2" />
+    <file type="web" url="file://$PROJECT_DIR$/openfga" />
   </component>
   <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />
