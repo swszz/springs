@@ -14,5 +14,5 @@ spring:
         default_batch_fetch_size: 30
         dialect: org.hibernate.dialect.MySQLDialect
         hbm2ddl:
-          auto: create-drop
+          auto: validate
     open-in-view: false

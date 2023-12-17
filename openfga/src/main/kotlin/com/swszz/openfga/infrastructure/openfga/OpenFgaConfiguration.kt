@@ -11,15 +11,15 @@ class OpenFgaConfiguration {
 
     companion object {
         private const val API_URL = "http://localhost:8080"
-        private const val STORE_ID: String = "store_id"
+        private const val STORE_ID: String = "01HHV5QYRM0YYTTJXW1Z8Y30FZ"
     }
 
     @Bean
     fun openFgaClient(): OpenFgaClient {
-        val config: ClientConfiguration = ClientConfiguration()
-            .apiUrl(API_URL)
-//            .authorizationModelId(System.getenv("FGA_AUTHORIZATION_MODEL_ID")) // Optional, can be overridden per request
-
-        return OpenFgaClient(config)
+        return OpenFgaClient(
+            ClientConfiguration()
+                .apiUrl(API_URL)
+                .storeId(STORE_ID)
+        )
     }
 }

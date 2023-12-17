@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "3.2.0"
     id("io.spring.dependency-management") version "1.1.4"
-    id("com.google.protobuf") version "0.9.4"
     kotlin("jvm") version "1.9.20"
     kotlin("plugin.spring") version "1.9.20"
     kotlin("plugin.jpa") version "1.9.20"
@@ -24,7 +23,6 @@ configurations {
 }
 
 repositories {
-    gradlePluginPortal()
     mavenCentral()
 }
 
@@ -35,9 +33,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.github.serpro69:kotlin-faker:1.15.0")
     implementation("dev.openfga:openfga-sdk:0.3.0")
-    implementation("com.google.protobuf:protobuf-kotlin:3.25.1")
-    implementation("io.grpc:grpc-protobuf:1.60.0")
-    runtimeOnly("io.grpc:grpc-kotlin-stub:1.4.1")
     runtimeOnly("mysql:mysql-connector-java:8.0.28")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
@@ -62,10 +57,4 @@ allOpen {
         "jakarta.persistence.MappedSuperclass",
         "jakarta.persistence.Embeddable"
     )
-}
-
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:21.0-rc-1"
-    }
 }

@@ -3,10 +3,12 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/batch" />
+    <file type="web" url="file://$PROJECT_DIR$/demo" />
     <file type="web" url="file://$PROJECT_DIR$/hexagonal-architecture" />
     <file type="web" url="file://$PROJECT_DIR$/oath2" />
     <file type="web" url="file://$PROJECT_DIR$/oauth2" />
     <file type="web" url="file://$PROJECT_DIR$/openfga" />
+    <file type="web" url="file://$PROJECT_DIR$/openfga-java" />
   </component>
   <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />

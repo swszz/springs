@@ -4,14 +4,12 @@ import com.swszz.openfga.infrastructure.mysql.Student
 import com.swszz.openfga.infrastructure.mysql.StudentGenerator
 import com.swszz.openfga.infrastructure.mysql.StudentJpaRepository
 import dev.openfga.sdk.api.client.OpenFgaClient
-import dev.openfga.sdk.api.client.model.ClientCreateStoreResponse
-import dev.openfga.sdk.api.model.CreateStoreRequest
-import org.springframework.boot.context.event.ApplicationReadyEvent
+import dev.openfga.sdk.api.model.*
 import org.springframework.boot.context.event.ApplicationStartedEvent
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.concurrent.CompletableFuture
+
 
 @Service
 class OpenFgaService(
@@ -19,6 +17,7 @@ class OpenFgaService(
     private val client: OpenFgaClient
 ) {
     private val studentGenerator: StudentGenerator = StudentGenerator()
+
 
     @Transactional
     fun generate(size: Int) {
@@ -30,17 +29,99 @@ class OpenFgaService(
     }
 
     @EventListener(ApplicationStartedEvent::class)
-    fun test() {
-        val response: CompletableFuture<ClientCreateStoreResponse> = client.createStore(
-            CreateStoreRequest()
-                .name("testStore")
-        )
+    fun test2() {
+        val request = WriteAuthorizationModelRequest()
+            .schemaVersion("1.1")
+            .typeDefinitions(
+                listOf(
+                    TypeDefinition().type("user").relations(mapOf()),
+                    TypeDefinition()
+                        .type("document")
+                        .relations(
+                            mapOf(
+                                "writer" to Userset(),
+                                "viewer" to Userset().union(
+                                    Usersets()
+                                        .child(
+                                            listOf(
+                                                Userset(),
+                                                Userset().computedUserset(ObjectRelation().relation("writer"))
+                                            )
+                                        )
+                                )
+                            )
+                        )
+                        .metadata(
+                            Metadata()
+                                .relations(
+                                    mapOf(
+                                        "writer" to RelationMetadata().directlyRelatedUserTypes(
+                                            listOf(RelationReference().type("user"))
+                                        ),
+                                        "viewer" to RelationMetadata().directlyRelatedUserTypes(
+                                            listOf(RelationReference().type("user"))
+                                        )
+                                    )
+                                )
+                        )
+                )
+            )
 
-        while (!response.isDone) {
-            ;
+
+//        val request: WriteAuthorizationModelRequest =
+//            WriteAuthorizationModelRequest()
+//                .schemaVersion(SCHEME_VERSION)
+//                // type user
+//                .addTypeDefinitionsItem(
+//                    TypeDefinition()
+//                        .type("user")
+//                        .relations(emptyMap())
+//                        .metadata(null)
+//                )
+//
+//                //type group
+//                //  relations
+//                //    define member: [user]
+//                .addTypeDefinitionsItem(
+//                    TypeDefinition()
+//                        .type("group")
+//                        .putRelationsItem(
+//                            "member", Userset()
+//                                ._this("{}")
+//                        ).metadata(
+//                            Metadata()
+//                                .putRelationsItem(
+//                                    "member", RelationMetadata()
+//                                        .addDirectlyRelatedUserTypesItem(
+//                                            RelationReference()
+//                                                .type("user")
+//                                                .condition("")
+//                                        )
+//                                )
+//                        )
+//                ).conditions(emptyMap())
+
+
+        println(request.toString())
+        val a = client.readAuthorizationModels();
+        val b = client.writeAuthorizationModel(request);
+
+
+        while (!a.isDone) {
         }
 
-        println(response)
+        while (!b.isDone) {
+        }
+        println(b.get().toString())
+
+        for (authorizationModel in a.get().authorizationModels) {
+            println(authorizationModel)
+        }
     }
 
+
+    companion object {
+        private const val SCHEME_VERSION: String = "1.1"
+    }
 }
+
