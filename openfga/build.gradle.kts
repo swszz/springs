@@ -58,3 +58,5 @@ allOpen {
         "jakarta.persistence.Embeddable"
     )
 }
+
+//"TH","KR","KR","TW","","DE","HK","KR","TW","US","","KR","KR","CN","","","KR","","DK","","KR","CN","CN","KR","","","CN","","","","","","","KR","KR","KR","","CA","KR","FR","US","KR","KR","TR","","KR","","NO","","KR","NL","","KR","CN","SE","KR","KR","TH","KR","","","DE","","KR","US","US","","SE","","KR","KR","BG","DK","KR","GB","BR","CN","TW","","","","KR","KR","","","CN","","","KR","FR","","","KR","KR","KR","TW","KR","ES","","","","","KR","","","","RO","","KR","KR","","KR","US","","DE","","","","","","SE","KR","","KR","","DK","KR","KR","","BR","CN","CN","KR","","KR","KR","KR","KR","","FR","US","","DK","TW","KR","","","","CN","KR","KR","CN","","HU","","CN","CA","","KR","KR","","US","FR","KR","TW","DK","CN","KR","BR","","","KR","","","","KR","CN","","KR","CN","CN","CN","KR","","FR","KR","KR","","","","ES","CN","CN",""
