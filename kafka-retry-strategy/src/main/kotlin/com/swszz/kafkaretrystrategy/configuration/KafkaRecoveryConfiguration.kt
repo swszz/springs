@@ -10,7 +10,7 @@ import org.springframework.util.backoff.FixedBackOff
 
 
 @Configuration
-internal class KafkaRetryConfiguration {
+internal class KafkaRecoveryConfiguration {
     @Bean
     fun customErrorHandler(): CommonErrorHandler {
         return CustomErrorHandler({ record, exception -> }, FixedBackOff(0, 0))
