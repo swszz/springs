@@ -2,7 +2,7 @@ package com.swszz.kafkaretrystrategy.listener
 
 import com.swszz.kafkaretrystrategy.constant.KafkaTopics
 import com.swszz.kafkaretrystrategy.event.SampleEvent2
-import com.swszz.kafkaretrystrategy.extension.toJsonString
+import com.swszz.kafkaretrystrategy.specification.RetryHandler
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
@@ -14,6 +14,11 @@ class SampleListener {
 
     @KafkaListener(topics = [KafkaTopics.SAMPLE], autoStartup = "true")
     fun listen(event: SampleEvent2) {
-        logger.info(event.toJsonString())
+        RetryHandler.execute(runnable = {
+            logger.info("payload : $event")
+            if (true) {
+                throw IllegalArgumentException("실패했어요...")
+            }
+        })
     }
 }

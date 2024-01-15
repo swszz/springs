@@ -8,6 +8,10 @@ import org.springframework.kafka.support.converter.StringJsonMessageConverter
 
 @Configuration
 internal class KafkaConsumerConfiguration {
+
+    /**
+     * json string 타입의 메시지를 Any 형태로 변환한다
+     */
     @Bean
     fun stringJsonMessageConverter(): RecordMessageConverter {
         return StringJsonMessageConverter(

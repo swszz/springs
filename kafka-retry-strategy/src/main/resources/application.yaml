@@ -12,3 +12,5 @@ spring:
       value-serializer: com.swszz.kafkaretrystrategy.serializer.AnyToJsonStringSerializer
     template:
       default-topic: sample
+    listener:
+      ack-mode: manual_immediate

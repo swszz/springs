@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.swszz.kafkaretrystrategy.specification.ObjectMapperSpecifications.Companion.STRING_OBJECT_MAPPER
 
 
-fun Any.toJsonString() =
+fun Any.toJsonString(): String =
     STRING_OBJECT_MAPPER.writeValueAsString(this)
 
 internal fun String.toMutableMap() =

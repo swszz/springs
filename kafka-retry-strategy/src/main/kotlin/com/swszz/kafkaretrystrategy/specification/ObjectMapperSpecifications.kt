@@ -20,6 +20,7 @@ internal class ObjectMapperSpecifications {
         val STRING_OBJECT_MAPPER: ObjectMapper =
             jacksonObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
                 .registerModule(
                     SimpleModule()
                         .addSerializer(LocalDateTime::class.java, LocalDateTimeStringSerializer())
