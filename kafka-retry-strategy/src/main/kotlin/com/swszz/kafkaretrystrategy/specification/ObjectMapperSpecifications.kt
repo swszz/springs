@@ -15,20 +15,18 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
-internal class ObjectMapperSpecifications {
-    companion object {
-        val STRING_OBJECT_MAPPER: ObjectMapper =
-            jacksonObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
-                .registerModule(
-                    SimpleModule()
-                        .addSerializer(LocalDateTime::class.java, LocalDateTimeStringSerializer())
-                        .addDeserializer(LocalDateTime::class.java, LocalDateTimeStringDeserializer())
-                        .addSerializer(LocalDate::class.java, LocalDateStringSerializer())
-                        .addDeserializer(LocalDate::class.java, LocalDateStringDeserializer())
-                        .addSerializer(ZonedDateTime::class.java, ZonedDateTimeStringSerializer())
-                        .addDeserializer(ZonedDateTime::class.java, ZonedDateTimeStringDeserializer())
-                ).enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-    }
+object ObjectMapperSpecifications {
+    val STRING_OBJECT_MAPPER: ObjectMapper =
+        jacksonObjectMapper()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
+            .registerModule(
+                SimpleModule()
+                    .addSerializer(LocalDateTime::class.java, LocalDateTimeStringSerializer())
+                    .addDeserializer(LocalDateTime::class.java, LocalDateTimeStringDeserializer())
+                    .addSerializer(LocalDate::class.java, LocalDateStringSerializer())
+                    .addDeserializer(LocalDate::class.java, LocalDateStringDeserializer())
+                    .addSerializer(ZonedDateTime::class.java, ZonedDateTimeStringSerializer())
+                    .addDeserializer(ZonedDateTime::class.java, ZonedDateTimeStringDeserializer())
+            ).enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
 }
