@@ -13,7 +13,7 @@ import org.springframework.util.backoff.FixedBackOff
 internal class KafkaRecoveryConfiguration {
     @Bean
     fun customErrorHandler(): CommonErrorHandler {
-        return CustomErrorHandler({ record, exception -> }, FixedBackOff(0, 0))
+        return CustomErrorHandler({ record, exception -> exception.printStackTrace() }, FixedBackOff(0, 0))
     }
 
     /**
