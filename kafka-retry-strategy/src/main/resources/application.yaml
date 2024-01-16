@@ -3,14 +3,13 @@ spring:
     consumer:
       bootstrap-servers: localhost:29092
       group-id: foo
-      auto-offset-reset: earliest
+      auto-offset-reset: latest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: true
     producer:
       bootstrap-servers: localhost:29092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: com.swszz.kafkaretrystrategy.serializer.AnyToJsonStringSerializer
     template:
       default-topic: sample
-    listener:
-      ack-mode: manual_immediate
