@@ -1,7 +1,7 @@
 package com.swszz.kafkaretrystrategy.extension
 
 import com.fasterxml.jackson.core.type.TypeReference
-import com.swszz.kafkaretrystrategy.specification.ObjectMapperSpecifications.Companion.STRING_OBJECT_MAPPER
+import com.swszz.kafkaretrystrategy.specification.ObjectMapperSpecifications.STRING_OBJECT_MAPPER
 
 
 fun Any.toJsonString(): String =
