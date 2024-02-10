@@ -1,0 +1,4 @@
+spice:
+  host: localhost
+  port: 50051
+  token: shared-key
