@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="org.springframework.boot.context.properties.ConfigurationProperties" />
+    </list>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/batch" />
@@ -11,6 +16,7 @@
     <file type="web" url="file://$PROJECT_DIR$/oauth2" />
     <file type="web" url="file://$PROJECT_DIR$/openfga" />
     <file type="web" url="file://$PROJECT_DIR$/openfga-java" />
+    <file type="web" url="file://$PROJECT_DIR$/spicedb" />
   </component>
   <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />

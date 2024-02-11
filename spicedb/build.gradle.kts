@@ -28,9 +28,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("com.authzed.api:authzed:0.6.0")
-    implementation("io.grpc:grpc-protobuf:1.61.1")
-    implementation("io.grpc:grpc-stub:1.61.1")
+    implementation("com.authzed.api:authzed:0.4.0")
+    implementation("io.grpc:grpc-protobuf:1.54.1")
+    implementation("io.grpc:grpc-stub:1.54.1")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

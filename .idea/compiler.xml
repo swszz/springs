@@ -7,7 +7,7 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/3.2.2/cdf33f985035494cb3ea6f9e5d6589ba9fb58e91/spring-boot-configuration-processor-3.2.2.jar" />
         </processorPath>
-        <module name="jpa-Inheritance.main" />
+        <module name="spicedb.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,6 +19,8 @@
       <module name="oath2.main" target="17" />
       <module name="oath2.test" target="17" />
       <module name="openfga-java" target="17" />
+      <module name="openfga-java.main" target="17" />
+      <module name="openfga-java.test" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

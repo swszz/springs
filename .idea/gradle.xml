@@ -13,15 +13,6 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo" />
-        <option name="gradleJvm" value="corretto-17" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/demo" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/hexagonal-architecture" />
         <option name="gradleJvm" value="corretto-17" />
         <option name="modules">
@@ -67,11 +58,11 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/openfga-java" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/spicedb" />
         <option name="gradleJvm" value="corretto-17" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/openfga-java" />
+            <option value="$PROJECT_DIR$/spicedb" />
           </set>
         </option>
       </GradleProjectSettings>

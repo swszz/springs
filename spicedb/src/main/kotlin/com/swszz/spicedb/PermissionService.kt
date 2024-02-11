@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service
 
 @Service
 internal class PermissionService(
-    private val permissionsServiceBlockingStub: PermissionsServiceBlockingStub
+    private val authZedPermissionService: PermissionsServiceBlockingStub,
 )
