@@ -6,4 +6,11 @@ import org.springframework.stereotype.Service
 @Service
 internal class PermissionManagementService(
     private val permissionsServiceBlockingStub: PermissionsServiceBlockingStub
-)
+) {
+
+    fun writePermission(
+
+    ) {
+
+    }
+}

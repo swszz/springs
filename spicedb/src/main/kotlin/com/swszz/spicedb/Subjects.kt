@@ -1,5 +1,5 @@
 package com.swszz.spicedb
 
-object Roles {
+object Subjects {
     const val USER: String = "user"
 }

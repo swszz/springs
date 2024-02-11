@@ -5,8 +5,8 @@ import com.authzed.api.v1.SchemaServiceOuterClass
 import com.swszz.spicedb.Permissions
 import com.swszz.spicedb.Relations
 import com.swszz.spicedb.Resources
-import com.swszz.spicedb.Roles
-import com.swszz.spicedb.request.AuthZedWriteSchemaRequest
+import com.swszz.spicedb.Subjects
+import com.swszz.spicedb.request.WriteSchemaRequest
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,15 +14,14 @@ internal class SchemaManagementService(
     private val schemaServiceBlockingStub: SchemaServiceBlockingStub
 ) {
     fun setup() {
-        val role = AuthZedWriteSchemaRequest.Role(Roles.USER)
-        val reader = AuthZedWriteSchemaRequest.Relation(name = Relations.READER, role = role)
-        val writer = AuthZedWriteSchemaRequest.Relation(name = Relations.WRITER, role = role)
-        val readPermission =
-            AuthZedWriteSchemaRequest.Permission(name = Permissions.READ, relations = setOf(reader, writer))
-        val writePermission = AuthZedWriteSchemaRequest.Permission(name = Permissions.WRITE, relations = setOf(writer))
-        val request = AuthZedWriteSchemaRequest.Request(
-            role = role,
-            resource = AuthZedWriteSchemaRequest.Resource(
+        val subject = WriteSchemaRequest.Subject(Subjects.USER)
+        val reader = WriteSchemaRequest.Relation(name = Relations.READER, subject = subject)
+        val writer = WriteSchemaRequest.Relation(name = Relations.WRITER, subject = subject)
+        val readPermission = WriteSchemaRequest.Permission(name = Permissions.READ, relations = setOf(reader, writer))
+        val writePermission = WriteSchemaRequest.Permission(name = Permissions.WRITE, relations = setOf(writer))
+        val request = WriteSchemaRequest.Request(
+            subject = subject,
+            resource = WriteSchemaRequest.Resource(
                 name = Resources.DOCUMENT,
                 relations = setOf(reader, writer),
                 permissions = setOf(readPermission, writePermission)

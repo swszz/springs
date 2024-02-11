@@ -1,23 +1,23 @@
 package com.swszz.spicedb.request
 
 
-internal class AuthZedWriteSchemaRequest {
+internal class WriteSchemaRequest {
 
     interface Schema {
         fun toRequestBody(): String
     }
 
     internal class Request(
-        val role: Role,
+        val subject: Subject,
         val resource: Resource
     ) : Schema {
         override fun toRequestBody(): String {
-            return role.toRequestBody() + "\n" +
+            return subject.toRequestBody() + "\n" +
                     resource.toRequestBody()
         }
     }
 
-    internal class Role(
+    internal class Subject(
         val name: String
     ) : Schema {
         override fun toRequestBody(): String {
@@ -47,10 +47,10 @@ internal class AuthZedWriteSchemaRequest {
 
     internal class Relation(
         val name: String,
-        val role: Role,
+        val subject: Subject,
     ) : Schema {
         override fun toRequestBody(): String {
-            return "relation $name: ${role.name}"
+            return "relation $name: ${subject.name}"
         }
 
     }
