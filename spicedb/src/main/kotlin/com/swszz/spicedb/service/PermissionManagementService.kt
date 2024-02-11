@@ -4,6 +4,6 @@ import com.authzed.api.v1.PermissionsServiceGrpc.PermissionsServiceBlockingStub
 import org.springframework.stereotype.Service
 
 @Service
-internal class PermissionService(
-    private val authZedPermissionService: PermissionsServiceBlockingStub,
+internal class PermissionManagementService(
+    private val permissionsServiceBlockingStub: PermissionsServiceBlockingStub
 )
