@@ -1,13 +1,13 @@
 package com.swszz.spicedb.request
 
 
-internal class WriteSchemaRequest {
+ class WriteSchemaRequest {
 
     interface Schema {
         fun toRequestBody(): String
     }
 
-    internal class Request(
+     class Request(
         val subject: Subject,
         val resource: Resource
     ) : Schema {
@@ -17,7 +17,7 @@ internal class WriteSchemaRequest {
         }
     }
 
-    internal class Subject(
+     class Subject(
         val name: String
     ) : Schema {
         override fun toRequestBody(): String {
@@ -25,7 +25,7 @@ internal class WriteSchemaRequest {
         }
     }
 
-    internal class Resource(
+     class Resource(
         val name: String,
         val relations: Set<Relation>,
         val permissions: Set<Permission>
@@ -45,7 +45,7 @@ internal class WriteSchemaRequest {
         }
     }
 
-    internal class Relation(
+     class Relation(
         val name: String,
         val subject: Subject,
     ) : Schema {
@@ -55,7 +55,7 @@ internal class WriteSchemaRequest {
 
     }
 
-    internal class Permission(
+     class Permission(
         private val name: String,
         private val relations: Set<Relation>,
     ) : Schema {

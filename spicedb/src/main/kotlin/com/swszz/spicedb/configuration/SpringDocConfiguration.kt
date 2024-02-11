@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-internal class SpringDocConfiguration {
+ class SpringDocConfiguration {
     @Bean
     fun openApi(): OpenAPI = OpenAPI()
         .components(components())

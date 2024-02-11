@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController("/schema")
-internal class SchemaController(
+ class SchemaController(
     private val schemaManagementService: SchemaManagementService,
 ) {
     @PostMapping("/setup")
