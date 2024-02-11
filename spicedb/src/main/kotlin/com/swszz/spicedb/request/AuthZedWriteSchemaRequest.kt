@@ -1,7 +1,7 @@
-package com.swszz.spicedb.request.schema
+package com.swszz.spicedb.request
 
 
-internal class AuthZedWriteSchema {
+internal class AuthZedWriteSchemaRequest {
 
     interface Schema {
         fun toRequestBody(): String
