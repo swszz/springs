@@ -1,0 +1,8 @@
+spring:
+  config:
+    import:
+      - classpath:redis.yaml
+      - classpath:kafka.yaml
+      - classpath:mariadb.yaml
+      - classpath:jpa.yaml
+      - classpath:docker.yaml
