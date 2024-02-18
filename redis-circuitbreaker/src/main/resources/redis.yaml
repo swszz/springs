@@ -3,3 +3,11 @@ spring:
     redis:
       host: localhost
       port: 6379
+      database: 0
+      password: password
+      connect-timeout: 60000
+  cache:
+    redis:
+      time-to-live: 10000
+      enable-statistics: true
+    type: redis

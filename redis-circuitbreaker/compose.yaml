@@ -4,6 +4,8 @@ services:
     restart: 'always'
     ports:
       - '6379:6379'
+    environment:
+      REDIS_PASSWORD: 'password'
   mariadb:
     image: 'mariadb'
     restart: 'always'

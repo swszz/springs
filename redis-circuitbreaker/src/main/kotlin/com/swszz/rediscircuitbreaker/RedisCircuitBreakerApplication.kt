@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class RedisCircuitbreakerApplication
+internal class RedisCircuitbreakerApplication
 
-fun main(args: Array<String>) {
+internal fun main(args: Array<String>) {
 	runApplication<RedisCircuitbreakerApplication>(*args)
 }
