@@ -1,10 +1,12 @@
 package com.swszz.rediscircuitbreaker.repository
 
-import com.swszz.rediscircuitbreaker.*
+import com.swszz.rediscircuitbreaker.constants.CacheNames
+import com.swszz.rediscircuitbreaker.constants.CircuitNames
+import com.swszz.rediscircuitbreaker.mapper.toEntity
+import com.swszz.rediscircuitbreaker.mapper.toModel
+import com.swszz.rediscircuitbreaker.model.Post
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
 import jakarta.persistence.EntityNotFoundException
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut
 import org.springframework.cache.annotation.Cacheable
@@ -16,8 +18,6 @@ internal class PostRepositoryWithCircuitBreaker(
     private val postJpaRepository: PostJpaRepository,
 ) {
 
-    private val logger: Logger = LoggerFactory.getLogger(javaClass)
-
     /**
      * Entity를 변경하는 메소드의 경우 상황에 따라 @CachePut과 @CacheEvict를 적용한다.<br>
      *
@@ -27,31 +27,19 @@ internal class PostRepositoryWithCircuitBreaker(
      * @see org.springframework.cache.annotation.CachePut
      * @see org.springframework.cache.annotation.CacheEvict
      */
-    @CircuitBreaker(
-        name = CircuitNames.SAVE_POST,
-        fallbackMethod = "savePostFallback"
-    )
     @CachePut(
         cacheNames = [CacheNames.REDIS_CIRCUIT_BREAKER],
-        key = "#post.id",
-        condition = "#post.deletedAt == null",
+        key = "#result.id",
+        condition = "#result.deletedAt == null",
+        unless = "#result.deletedAt != null"
     )
     @CacheEvict(
         cacheNames = [CacheNames.REDIS_CIRCUIT_BREAKER],
-        key = "#post.id",
-        condition = "#post.deletedAt != null"
+        key = "#post.id"
     )
     fun savePost(
         post: Post
     ): Post {
-        return postJpaRepository.save(post.toEntity()).toModel()
-    }
-
-    private fun savePostFallback(
-        post: Post,
-        throwable: Throwable
-    ): Post {
-        logger.warn("exception message : ${throwable.message}")
         return postJpaRepository.save(post.toEntity()).toModel()
     }
 
@@ -62,12 +50,16 @@ internal class PostRepositoryWithCircuitBreaker(
      *
      * @see org.springframework.cache.annotation.Cacheable
      */
+    @CircuitBreaker(
+        name = CircuitNames.SAVE_POST,
+        fallbackMethod = "savePostFallback"
+    )
     @Cacheable(
         cacheNames = [CacheNames.REDIS_CIRCUIT_BREAKER],
         key = "#id",
         unless = "true"
     )
-    fun findPostByIdWithCache(
+    fun findPostById(
         id: Long
     ): Post {
         return postJpaRepository.findById(id)

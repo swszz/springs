@@ -1,4 +1,7 @@
-package com.swszz.rediscircuitbreaker
+package com.swszz.rediscircuitbreaker.mapper
+
+import com.swszz.rediscircuitbreaker.entity.PostEntity
+import com.swszz.rediscircuitbreaker.model.Post
 
 internal fun Post.toEntity(): PostEntity {
     return PostEntity(id = this.id, content = this.content)

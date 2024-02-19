@@ -6,3 +6,6 @@ spring:
       - classpath:mariadb.yaml
       - classpath:jpa.yaml
       - classpath:docker.yaml
+      - classpath:cache.yaml
+      - resilience4j.yaml
+      - classpath:logging.yaml

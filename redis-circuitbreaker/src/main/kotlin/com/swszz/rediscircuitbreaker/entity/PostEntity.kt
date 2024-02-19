@@ -1,4 +1,4 @@
-package com.swszz.rediscircuitbreaker
+package com.swszz.rediscircuitbreaker.entity
 
 import jakarta.persistence.*
 import java.time.ZonedDateTime

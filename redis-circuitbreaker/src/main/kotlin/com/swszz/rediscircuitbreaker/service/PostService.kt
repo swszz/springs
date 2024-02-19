@@ -1,5 +1,6 @@
-package com.swszz.rediscircuitbreaker
+package com.swszz.rediscircuitbreaker.service
 
+import com.swszz.rediscircuitbreaker.model.Post
 import com.swszz.rediscircuitbreaker.repository.PostRepositoryWithCircuitBreaker
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,9 +18,9 @@ internal class PostService(
     }
 
     @Transactional(readOnly = true)
-    fun findPostByIdWithCache(
+    fun findPostById(
         id: Long
     ): Post {
-        return postRepositoryWithCircuitBreaker.findPostByIdWithCache(id = id)
+        return postRepositoryWithCircuitBreaker.findPostById(id = id)
     }
 }

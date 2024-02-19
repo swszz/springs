@@ -1,4 +1,4 @@
-package com.swszz.rediscircuitbreaker
+package com.swszz.rediscircuitbreaker.model
 
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.PositiveOrZero

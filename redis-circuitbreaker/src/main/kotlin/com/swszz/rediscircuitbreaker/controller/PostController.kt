@@ -1,5 +1,7 @@
-package com.swszz.rediscircuitbreaker
+package com.swszz.rediscircuitbreaker.controller
 
+import com.swszz.rediscircuitbreaker.model.Post
+import com.swszz.rediscircuitbreaker.service.PostService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -22,6 +24,6 @@ internal class PostController(
     fun test(
         @RequestParam id: Long
     ): Post {
-        return postService.findPostByIdWithCache(id = id)
+        return postService.findPostById(id = id)
     }
 }
