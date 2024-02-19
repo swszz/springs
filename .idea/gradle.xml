@@ -13,6 +13,15 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/caching-strategy" />
+        <option name="gradleJvm" value="corretto-17" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/caching-strategy" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/hexagonal-architecture" />
         <option name="gradleJvm" value="corretto-17" />
         <option name="modules">
@@ -54,15 +63,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/openfga" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/redis-circuitbreaker" />
-        <option name="gradleJvm" value="corretto-17" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/redis-circuitbreaker" />
           </set>
         </option>
       </GradleProjectSettings>
