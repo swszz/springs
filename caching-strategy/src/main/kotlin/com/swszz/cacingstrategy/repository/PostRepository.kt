@@ -4,7 +4,6 @@ import com.swszz.cacingstrategy.constants.CacheNames
 import com.swszz.cacingstrategy.mapper.toEntity
 import com.swszz.cacingstrategy.mapper.toModel
 import com.swszz.cacingstrategy.model.Post
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut

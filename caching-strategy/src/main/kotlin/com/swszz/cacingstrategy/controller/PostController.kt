@@ -15,7 +15,7 @@ internal class PostController(
     ): Post {
         return postService.savePost(
             post = Post(
-                id = 0,
+                id = 1,
                 content = "content!",
                 deletedAt = when (deleted) {
                     true -> ZonedDateTime.now()

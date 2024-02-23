@@ -3,5 +3,5 @@ spring:
     redis:
       enable-statistics: true
       cache-null-values: true
-      time-to-live: 60000
+      time-to-live: 10000
     type: redis
