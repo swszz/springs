@@ -2,6 +2,7 @@ package com.swszz.cacingstrategy.controller
 
 import com.swszz.cacingstrategy.model.Post
 import com.swszz.cacingstrategy.service.PostService
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 import java.time.ZonedDateTime
 
@@ -11,8 +12,11 @@ internal class PostController(
 ) {
     @PostMapping("post")
     fun savePost(
-        @RequestBody deleted: Boolean
+        @RequestBody deleted: Boolean,
+        transactional: Transactional
     ): Post {
+        transactional.readOnly
+
         return postService.savePost(
             post = Post(
                 id = 1,
@@ -30,5 +34,15 @@ internal class PostController(
         @RequestParam id: Long
     ): Post {
         return postService.findPostById(id = id)
+    }
+
+    @PostMapping("publish")
+    fun publish() {
+        postService.sendWithoutThrow()
+    }
+
+    @PostMapping("publishWithThrow")
+    fun publishWithThrow() {
+        postService.sendWithThrow()
     }
 }

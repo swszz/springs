@@ -1,3 +1,8 @@
 logging:
   level:
+    root: INFO
     org.springframework.cache: TRACE
+    org.springframework.transaction: trace
+    org.springframework.kafka.transaction: trace
+    org.springframework.kafka: trace
+    org.hibernate.SQL: trace

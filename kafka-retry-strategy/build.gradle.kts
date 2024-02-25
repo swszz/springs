@@ -32,6 +32,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.kafka:spring-kafka")
     implementation("io.github.resilience4j:resilience4j-retry:2.2.0")
+    implementation("org.apache.kafka:kafka_2.13:3.6.1")
 
 
     runtimeOnly("com.h2database:h2")
